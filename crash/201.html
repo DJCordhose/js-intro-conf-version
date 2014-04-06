@@ -1,0 +1,374 @@
+<!--http://localhost:63342/JavaScript%20Training/#/-->
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+	<head>
+		<meta charset="utf-8">
+
+		<title>201 Advanced JavaScript</title>
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<link rel="stylesheet" href="../reveal.js/css/reveal.min.css">
+        <link rel="stylesheet" href="../reveal.js/css/theme/simple.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../reveal.js/lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="../reveal.js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+        <script src="../reveal.js/lib/js/html5shiv.js"></script>
+        <![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section>
+                    <h1>JavaScript 201</h1>
+                    <h3>Fortgeschrittenes JavaScript</h3>
+                    <!--<p>-->
+                        <!--<a href="?print-pdf" target="_blank">Druck-Version</a>-->
+                    <!--</p>-->
+				</section>
+
+            <section>
+                <section>
+                    <h2>Objekte, die Zweite</h2>
+                    <ul>
+                        <li class="fragment">Objekte können auch Funktionen als Properties haben
+                        <li class="fragment">Diese funktionieren dann wie Methoden, d.h. <code>this</code> ist an das Objekt gebunden über das sie aufgerufen werden
+    <li class="fragment"><pre><code class="javascript" contenteditable>var obj = {
+        field: 10,
+        log: function() {
+            console.log(this.field);
+        }
+    };
+
+    obj.log(); // 10
+    </code></pre>
+                        <li class="fragment">Objekte sind damit (beinahe) nur Strukturen mit Daten und Funktions-Referenzen
+                    </ul>
+                </section>
+                <section>
+                    <h3>Objekte sind hoch dynamisch</h3>
+                        <p class="fragment">Objekten kann man jeder Zeit Properties hinzufügen oder von diesen entfernen</p>
+    <pre class="fragment"><code class="javascript" contenteditable>var obj = {
+    field: 10,
+    log: function() {
+        console.log(this.field);
+    }
+};</code></pre>
+    <pre class="fragment"><code class="javascript" contenteditable>obj.log(); // => 10
+delete obj.field;
+obj.log(); // undefined
+obj.field = 10;
+obj.log(); // => 10
+</code></pre>
+                    <p class="fragment">Achtung: Dies kann zu Verwirrung von Kollegen und JITs führen</p>
+                </section>
+            </section>
+            <section>
+            <section>
+                <h2>Prototypen</h2>
+                <ul>
+                    <li class="fragment">Jedes Objekt zusätzlich hat eine Referenz auf seinen Prototyp
+                        <ul>
+                            <li><code>Object.getPrototypeOf()</code> in neueren Browsern</li>
+                        </ul>
+                    </li>
+                    <li class="fragment"><code>Object</code> hat keinen Prototypen, ist aber Prototyp aller anderen Objekte
+                    <li class="fragment">Lesende Property-Zugriffe können transitiv an Prototypen delegiert werden
+                    <li class="fragment">Dies heißt prototypische Vererbung
+                </ul>
+            </section>
+            <section>
+                <h2>Setzen des Prototypen aka das Typen-System</h2>
+                <p class="fragment">Der Prototyp kann nicht direkt, aber durch Aufruf von <code>new</code> gesetzt werden
+                </p>
+    <pre class="fragment"><code class="javascript" contenteditable>
+/** @constructor */
+function Person(name) {
+    this.name = name;
+}
+Person.prototype.getName = function() {
+    return this.name;
+};
+
+var olli = new Person('Olli');
+olli.getName() === 'Olli';
+    </code></pre>
+            </section>
+
+            <section>
+                <h4>Ablauf eines Konstruktoraufrufs mit <code>new</code></h4>
+                <ol>
+                    <li class="fragment">ein leeres, neues Objekt wird erzeugt
+                    <li class="fragment">die Konstruktor-Funktion hat ein Property <code>prototype</code>, dies wird als Prototyp des neuen Objekts verwendet
+                    <li class="fragment"><code>this</code> wird an dieses neue Objekte gebunden
+                    <li class="fragment">die Konstruktor-Funktion wird aufgerufen (mit <code>this</code> gebunden)
+                    <li class="fragment">das neue Objekt wird implizit zurückgegeben (wenn die Funktion kein explizites <code>return</code> hat)
+                </ol>
+            </section>
+
+            <section>
+                <h2>"Typsystem"</h2>
+                <p>Ein Objekt ist <code>instanceof</code> aller seiner Prototypen
+                </p>
+    <pre><code class="javascript" contenteditable>
+/** @constructor */
+function Person(name) {
+    this.name = name;
+}
+Person.prototype.getName = function() {
+    return this.name;
+};
+
+var olli = new Person('Olli');
+olli instanceof Object;
+olli instanceof Person;
+    </code></pre>
+            </section>
+
+        </section>
+        <section>
+            <h2>Übung 3: Typen</h2>
+            <ol>
+                <li>Schreibe einen Typen für Person
+                    <ul>
+                        <li>Lasse im Konstruktor die drei bekannten Parameter für <code>name</code>,
+                            <code>alter</code> und <code>geschlecht</code> zu
+                        <li>Mache aus allen Funktionen, die auf Personen arbeiten, Methoden
+                    </ul>
+                </li>
+                <li>Erzeuge ein Objekt vom Typ Person und rufe Methoden darauf auf
+            </ol>
+        </section>
+
+                <section>
+                    <section>
+                        <h3>Vererbung</h3>
+                        <ol>
+                            <li class="fragment">Typen-Hierarchien und Instanzen nutzen beide Prototypische Vererbung
+                            <li class="fragment">Typen-Hierarchien werden einmal aufgebaut und als Prototypen der Instanzen verwendet
+                            <li class="fragment">Typen-Hierarchien werden ebenso über Prototypen erstellt
+                            <li class="fragment">Aufruf von Super-Konstruktoren und Super-Methoden über call / apply
+                        </ol>
+                    </section>
+                    <section>
+                        <h3>Vererbung #1</h3>
+    <pre><code class="javascript" contenteditable>function Person(name, gender) {
+    this.name = name;
+    this.gender = gender;
+}
+Person.prototype.getName = function() {
+    return this.name;
+};
+
+function Male(name) {
+    Person.call(this, name, "Male"); // super call
+}
+_extends(Male, Person);</code></pre>
+                    </section>
+                    <section>
+                        <h3>Vererbung #2</h3>
+    <pre><code class="javascript" contenteditable>Male.prototype.getName = function() {
+    // super call
+    return "Mr " + Person.prototype.getName.call(this);
+};
+
+var olli = new Male('Olli');
+olli.getName() === 'Mr Olli';
+olli.gender === 'Male';
+olli instanceof Male;
+olli instanceof Person;
+olli instanceof Object;</code></pre>
+                    </section>
+                    <section>
+                        <h3>_extends</h3>
+                        <p>Direktes Erzeugen des Prototypen-Properties</p>
+    <pre><code class="javascript" contenteditable>function _extends(_sub, _super) {
+    _sub.prototype = Object.create(_super.prototype);
+} </code></pre>
+<p class="fragment">Erzeugt ein neues Objekt mit dem angegeben Objekt als Prototypen</p>
+<p class="fragment"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create">Referenz auf MDN</a></p>
+                    </section>
+                </section>
+            <section>
+                <h2>Übung 4: Vererbung</h2>
+                <ol>
+                    <li>Schreibe den Typen Customer
+                        <ul>
+                            <li>Customer soll von Person erben
+                            <li>Berechne im Konstruktor aus den Parametern zumindest ein zusätzliches Feld, das den vermuteten bevorzugten Kaufgegenstand angibt
+                            <li>Rufe aus dem Customer-Konstruktor den Person-Konstruktor auf
+                            <li>Überschreibe die Methode <code>getName</code>
+                            <li>Füge die Methode <code>shop</code> hinzu, die den bevorzugten Gegenstand ausgibt
+                        </ul>
+                    </li>
+                    <li>Erzeuge mindestens ein Objekt vom Typ Customer und rufe Methoden darauf auf
+                </ol>
+            </section>
+                <section>
+                    <h3>Static</h3>
+    <pre><code class="javascript" contenteditable>// Statisches Feld
+Person.lieblingsName = "Olli";
+
+// Statische Funktion, greift nicht auf this zu
+Person.getLieblingsName = function() {
+    return Person.lieblingsName;
+};
+
+Person.lieblingsName === "Olli";
+Person.getLieblingsName() === "Olli";</code></pre>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Module</h2>
+                        <p class="fragment">Module in JavaScript werden über <code>Closures</code> realisiert</p>
+                    </section>
+                    <section>
+                        <h2>Closure in einem Satz</h2>
+                        <p>Eine innere Funktion hat immer Zugriff auf alle Variablen und Parameter ihrer äußeren Funktion, <em>auch wenn diese äußere Funktion bereits beendet ist</em>.</p>
+                        <p><small>Frei nach <em>Douglas Crockford</em></small></p>
+                    </section>
+
+                <section>
+                    <h3>Beispiel Closure</h3>
+                        <pre><code class="javascript" contenteditable>function outer() {
+    var used = "Olli";
+    var unused = "Weg";
+    return (function() {
+        return "Text: " + used;
+    });
+}
+
+var inner = outer();
+console.log(inner());</code></pre>
+                </section>
+                    <section>
+                        <h2>Closure Definition</h2>
+                        <p class="fragment">Eine Closure ist eine spezielle Art von Objekt, welche zwei Dinge kombiniert</p>
+                        <ol>
+                            <li class="fragment">Eine Funktion</li>
+                            <li class="fragment">die Umgebung in welcher diese Funktion erzeugt wurde
+                                - diese Umgebung besteht aus allen lokalen Variablen und Parametern, die sichtbar waren als die Closure erzeugt wurde</li>
+                        </ol>
+                        <p class="fragment"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Closures">Aus der Definition auf MDN</a></p>
+                    </section>
+                    <section>
+                        <h3>Revealing Module Pattern</h3>
+<pre><code class="javascript" contenteditable>var humanresources = {};
+(function () {
+    function InternalStuff() {
+    }
+
+    function Person(name) {
+        this.name = name;
+        // uses internal stuff
+    }
+
+    humanresources.Person = Person;
+})();
+</code></pre>
+                    </section>
+                    <section>
+                    <h3>Sichtbarkeit bei Revealing Module Pattern</h3>
+<pre><code class="javascript" contenteditable>var olli = new humanresources.Person('Olli');
+olli.name === 'Olli';
+// TypeError: undefined is not a function
+new humanresources.InternalStuff();</code></pre>
+                </section>
+                    <section>
+                        <h3>Namespaces</h3>
+<pre><code class="javascript" contenteditable>var eu = eu || {};
+eu.zeigermann = {};
+eu.zeigermann.person = {};
+(function (person) {
+    // Constructor
+    function Person(name) {
+        this.name = name;
+    }
+
+    // Factory
+    function create(name) {
+        return new Person(name);
+    }
+
+    // Export der Factory-Methode
+    person.createPerson = create;
+})(eu.zeigermann.person);
+</code></pre>
+                    </section>
+                    <section>
+                        <h3>Import</h3>
+<pre><code class="javascript" contenteditable>eu.zeigermann.main = {};
+(function (main, person) {
+    function run() {
+        var olli = person.createPerson("Olli");
+        console.log(olli.name); // => "Olli"
+
+        console.log(person.Person); // => undefined
+    }
+    main.run = run;
+})(eu.zeigermann.main, eu.zeigermann.person);
+
+eu.zeigermann.main.run();</code></pre>
+                    </section>
+                </section>
+                <section>
+                    <h2>Übung 5: Module</h2>
+                    <ol>
+                        <li>Schreibe ein Modul, in das du die vorhandenen Typendefinitionen verschiebst. Dieses Modul soll
+                            <ul>
+                                <li>nach außen nur den <code>Customer</code>-Typen exportieren
+                            </ul>
+                        </li>
+                        <li>Schreibe den aufrufenden Code so um, dass er mit den neuen Modulen arbeitet
+                    </ol>
+                </section>
+            </div>
+
+		</div>
+
+		<script src="../reveal.js/lib/js/head.min.js"></script>
+		<script src="../reveal.js/js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/../reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/none
+
+				// Optional libraries used to extend on ../reveal.js
+				dependencies: [
+					{ src: '../reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../reveal.js/plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
