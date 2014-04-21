@@ -33,11 +33,7 @@
 			<div class="slides">
 
 				<section>
-                    <h1>JavaScript 201</h1>
-                    <h3>Fortgeschrittenes JavaScript</h3>
-                    <!--<p>-->
-                        <!--<a href="?print-pdf" target="_blank">Druck-Version</a>-->
-                    <!--</p>-->
+                    <h1>JavaScript 201: Patterns</h1>
 				</section>
 
             <section>
@@ -47,39 +43,32 @@
                         <li class="fragment">Objekte können auch Funktionen als Properties haben
                         <li class="fragment">Diese funktionieren dann wie Methoden, d.h. <code>this</code> ist an das Objekt gebunden über das sie aufgerufen werden
     <li class="fragment"><pre><code class="javascript" contenteditable>var obj = {
-        field: 10,
-        log: function() {
-            console.log(this.field);
-        }
-    };
-
-    obj.log(); // 10
-    </code></pre>
-                        <li class="fragment">Objekte sind damit (beinahe) nur Strukturen mit Daten und Funktions-Referenzen
-                    </ul>
-                </section>
-                <section>
-                    <h3>Objekte sind hoch dynamisch</h3>
-                        <p class="fragment">Objekten kann man jeder Zeit Properties hinzufügen oder von diesen entfernen</p>
-    <pre class="fragment"><code class="javascript" contenteditable>var obj = {
     field: 10,
     log: function() {
         console.log(this.field);
     }
-};</code></pre>
-    <pre class="fragment"><code class="javascript" contenteditable>obj.log(); // => 10
-delete obj.field;
-obj.log(); // undefined
-obj.field = 10;
-obj.log(); // => 10
-</code></pre>
-                    <p class="fragment">Achtung: Dies kann zu Verwirrung von Kollegen und JITs führen</p>
+};
+
+obj.log(); // 10
+    </code></pre>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Singleton</h3>
+                    <ul>
+                        <li class="fragment">Wie gesehen, kann man in JavaScript Objekte auch ohne einen Typ erzeugen
+                        <li class="fragment">In klassenbasierten Sprachen muss man auch dafür einen Typ erzeugen und darauf achten, dass man nur eine Instanz erzeugen kann
+                        <li class="fragment">Das Pattern dazu heißt <code>Singleton</code>
+                        <li class="fragment">In JavaScript braucht man dieses Pattern nicht
+                        <li class="fragment">Manchmal möchte man allerdings auch mehrere Objekte mit dergleichen oder ähnlichen Struktur erzeugen
+                    </ul>
                 </section>
             </section>
             <section>
                 <section>
                     <h2>Klassische Typen und Vererbung mit JavaScript</h2>
                     <ul>
+                        <li class="fragment">Typen und Konstruktoren sind Mechanismen, um mehrere, strukturell gleiche oder ähnliche Objekte zu erzeugen
                         <li class="fragment">Auch in JavaScript können eigene Typen definiert werden
                         <li class="fragment">Einfachvererbung ist ebenso möglich
                         <li class="fragment">Der Mechanismus ist nicht direkt in die Sprache eingebaut
@@ -87,7 +76,6 @@ obj.log(); // => 10
                         <li class="fragment">Grundlage ist die prototypische Vererbung
                     </ul>
                 </section>
-
                 <section>
                 <h2>Prototypen</h2>
                 <ul>

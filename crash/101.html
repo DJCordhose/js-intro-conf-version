@@ -33,26 +33,24 @@
 			<div class="slides">
 
 				<section>
-					<h1>JavaScript 101</h1>
-					<h3>Einführung in JavaScript</h3>
-					<p>
-						<small><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a></small>
-					</p>
-                    <!--<p>-->
-                        <!--<a href="?print-pdf" target="_blank">PDF Version</a>-->
-                    <!--</p>-->
+					<h1>JavaScript 101: Grundlagen</h1>
 				</section>
 
                 <section>
                     <h2>Object</h2>
-                        <pre><code class="javascript" contenteditable>
-var map = {olli: 'Huhu', zweites$Feld: 1, $: "Auch sowas geht!"};
-typeof map === "object";
-map.$;
-map["zweites$Feld"];
+                        <pre><code class="javascript" contenteditable>var map = {
+    feld1: 'Huhu',
+    zweites$Feld: "Auch sowas geht!"
+};
+console.log(typeof map === "object"); // true
+console.log(map.feld1); // Huhu
+console.log(map["zweites$Feld"]); // Auch sowas geht!
+
 map.hund = "Ganz neu geht auch";
 map.f = function() { return "Aha!" };
-                        </code></pre>
+
+delete map.hund; // löschen
+console.log(map.hund); // undefined</code></pre>
                 </section>
 
                 <section>
