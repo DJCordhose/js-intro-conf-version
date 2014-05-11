@@ -5,6 +5,7 @@ Vorbereitung
   - Inkl. WebStorm.exe
   - node.js
   - chrome
+- Bücher (als Preis)
 
 Vormittag
 ================
@@ -42,3 +43,9 @@ Crash 201
 
 Zum Abschluss des Tags wenn noch Zeit Zur Besänftigung:
 * Vererbungs-Beispiel in http://www.typescriptlang.org/Playground/ zeigen
+
+Abschluss
+===================
+* Hinweis auf Buch und Buch verlosen
+* Bücher verlosen
+* WebStorm-Lizenz verlosen
