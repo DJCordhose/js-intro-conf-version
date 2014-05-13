@@ -18,8 +18,9 @@ Person.prototype.log = function () {
     console.log(info);
 };
 
-
+Person.prototype.toString = function () {
+    return "Olli war hier";
+};
 
 var opa = new Person("Opa", 88, "M");
-console.log(opa.getName() === "Opa");
-opa.log();
+console.log(opa + "");

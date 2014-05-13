@@ -1,13 +1,5 @@
 "use strict";
 
-
-
-/**
- *
- * @param _sub {function}
- * @param _super {function}
- * @private
- */
 function _extends(_sub, _super) {
     /**
      *
