@@ -7,38 +7,21 @@ Vorbereitung
 Grundsätzliches
 ===============
 
-* Gesamtdauer 3,5 Std
+* Gesamtdauer 3,0 Std
+
 * Teilnehmer installieren nichts
-* Folien und Übungen nur im Web
-* Teilnehmer kriegen die Musterlösung aller Übungen und können damit jeweils 10-15 Minuten experimentieren
-* Danach zeigen wir die Lösung und erklären
+* Folien online auf zeigermann.eu ausgepackt und als zip
+* Übungen auf jsbin
 
 Ablauf
 ======
 
- * Zeigen wo die Folien zu finden sind
+* Zeigen wo die Folien zu finden sind
    * Einführung in den Gebrauch der Folien - Navigation
-   * Gebrauch der Consolen für Chrome und Firefox zeigen
+   * Gebrauch von jsbin zeigen
 
-  * Hello World
-
-Crash 101
-
-  * Intro:
-    * erläutern, dass man mit var eine neuen Variable deklariert
-
-  * Higher-Order-Funktionen und Varargs auslassen oder nur kurz zeigen
-
-
-Crash 202
-
-  * Setzen des Prototypen:
-    - zur Einleitung zeigen nach Objekte, die Zweite
-      // Fragestellung: Wo kommt das her?
-      obj.toString();
-
-
-Crash 201
+* erste 90 Minuten für Grundlagen
+* zweite 90 Miunten für OO und Module
   * Module
     * Closure-Beispiel in WebStorm (Sandbox) vorbereiten
     * Namespaces und Import auslassen oder nur kurz zeigen

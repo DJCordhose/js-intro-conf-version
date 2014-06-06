@@ -1,10 +1,10 @@
 <!--http://localhost:63342/JavaScript%20Training/#/-->
 <!doctype html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
 	<head>
 		<meta charset="utf-8">
 
-		<title>201 Advanced JavaScript</title>
+		<title>Einführung in JavaScript für Java-Entwickler</title>
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -33,10 +33,295 @@
 			<div class="slides">
 
 				<section>
-                    <h1>JavaScript 201: Patterns</h1>
+					<h2>Einführung in JavaScript für Java-Entwickler</h2>
+					<p>
+						<small><a href="mailto:oliver.zeigermann@gmail.com">Oliver Zeigermann</a> / <a href="http://zeigermann.eu">http://zeigermann.eu</a></small>
+					</p>
+                    <p>
+                        <small>Oliver Ochs TODO</small>
+                    </p>
 				</section>
 
-            <section>
+                <section>
+                    <h2>Oliver Ochs TODO</h2>
+                </section>
+                <section>
+                    <h2>Oliver Zeigermann</h2>
+                    <img src="olli.JPG" height="200">
+                    <ul>
+                        <li><a href="http://zeigermann.eu">http://zeigermann.eu</a>
+                        <li><a href="https://twitter.com/DJCordhose">@DJCordhose</a>
+                        <li><a href="https://github.com/DJCordhose">https://github.com/DJCordhose</a>
+                        <li><a href="http://javatojavascript.blogspot.de/">javatojavascript.blogspot.de</a>
+                        <li><a href="http://www.oose.de/m/oliver-zeigermann">www.oose.de/m/oliver-zeigermann</a>
+                    </ul>
+                </section>
+                <section>
+                    <section>
+                        <h1>Hello World</h1>
+                    </section>
+                    <section>
+                        <h2>Hello World #1</h2>
+                        <pre><code class="xml" contenteditable>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Hello World!&lt;/title&gt;
+    &lt;script&gt;
+      alert("Hello World");
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+                    </code></pre>
+                    <a href="helloworld.html" target="_blank">Run</a>
+                    </section>
+                    <section>
+                        <h2>Hello World #2</h2>
+                        <pre><code class="xml" contenteditable>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Hello World!&lt;/title&gt;
+  &lt;/head&gt;
+    &lt;body&gt;
+      &lt;div id="log">&lt;/div>
+      &lt;script&gt;
+          var element = document.getElementById("log");
+          element.innerHTML = "&lt;h1>Hello World&lt;/h1>";
+      &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+                        </code></pre>
+                        <a href="helloworld2.html" target="_blank">Run</a>
+                    </section>
+                    <section>
+                        <h2>Hello World #3</h2>
+                        <pre><code class="javascript" contenteditable>
+node -e "console.log('Hello World');"
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Hello World #4</h2>
+                        <img src="Devtools-Screenshot.png">
+                    </section>
+                </section>
+
+                <section>
+                    <h2>Object</h2>
+                        <pre><code class="javascript" contenteditable>var map = {
+    feld1: 'Huhu',
+    zweites$Feld: "Auch sowas geht!"
+};
+console.log(typeof map === "object"); // true
+console.log(map.feld1); // Huhu
+console.log(map["zweites$Feld"]); // Auch sowas geht!
+
+map.hund = "Ganz neu geht auch";
+map.f = function() { return "Aha!" };
+
+delete map.hund; // löschen
+console.log(map.hund); // undefined</code></pre>
+                </section>
+
+                <section>
+                    <h2>Array</h2>
+                        <pre><code class="javascript" contenteditable>
+var array = ["a", "b", "c"];
+var el = array[2];
+array[1] = 20;
+typeof array === "object";
+// fügt die 4 am Ende hinzu
+array.push(4);
+// An Position 1 werden 2 Elemente entfernt und zurück gegeben
+array.splice(1, 2);
+// An Position 1 werden 0 Elemente entfernt und zurück gegeben
+// Zudem wird an Position 1 "x" hinzugefügt
+array.splice(1, 0, "x");
+                        </code></pre>
+                </section>
+                <section>
+                    <h2>Typen</h2>
+                        <pre><code class="javascript" contenteditable>var string = "String";
+typeof string === "string";
+
+var int = 1;
+typeof int === "number";
+
+var float = 1.0;
+typeof float === "number";
+
+var bool = true;
+typeof bool === "boolean";
+
+var func = function() {};
+typeof func === "function";
+
+typeof michGibtEsNicht === "undefined";</code></pre>
+                </section>
+
+                <section>
+                <section>
+                    <h2>Kontrollstrukturen</h2>
+                </section>
+                <section>
+                    <h2>for</h2>
+                        <pre><code class="javascript" contenteditable>
+for (var i=0; i &lt; array.length; i++) {
+    console.log(i + ": " + array[i]);
+}
+
+// Durch alle Feld-Namen iterieren
+// Geht für Map / Object und für Array!
+for (var i in map) {
+    console.log(i + ": " + map[i]);
+}
+                        </code></pre>
+                </section>
+
+                <section>
+                    <h2>Kontrollstrukturen ansonsten wie in Java / C#</h2>
+                    <ul>
+                        <li>if / else
+                        <li>while / do
+                        <li>switch
+                        <li>break / continue
+                        <li><a href="https://developer.mozilla.org/en-US/docs/JavaScript/Guide/Statements">Referenz</a></li>
+                    </ul>
+                </section>
+            </section>
+                <section>
+                <section>
+                    <h2>Funktionen</h2>
+                        <pre><code class="javascript" contenteditable>
+function f2() {
+    console.log("Called!");
+}
+var result2 = f2();
+result2 === undefined;
+
+var f1 = function(p1, p2) {
+    return p1 + p2;
+};
+var result1 = f1(1,2);
+result1 === 3;
+                        </code></pre>
+                </section>
+
+                <section>
+                    <h2>Optionale Parameter</h2>
+                        <pre><code class="javascript" contenteditable>function f1(p1) {
+    if (typeof p1 === 'undefined') {
+        return null;
+    } else {
+        return p1;
+    }
+}
+
+var result1 = f1(1);
+console.log(result1 === 1);
+
+var result2 = f1();
+console.log(result2 === null);</code></pre>
+                </section>
+                <section>
+                    <h2>Varargs #1</h2>
+                    <pre><code class="javascript" contenteditable>function f2() {
+    // "arguments" enthält immer alle Argumente der Funktion
+    if (typeof arguments[0] === 'undefined') {
+        return null;
+    } else {
+        return arguments[0];
+    }
+}
+
+var result3 = f2(1);
+console.log(result3 === 1);
+
+var result4 = f2();
+console.log(result4 === null);</code></pre>
+                </section>
+                    <section>
+                        <h2>Varargs #2</h2>
+                    <pre><code class="javascript" contenteditable>function summe() {
+    var sum = 0;
+    for (var a in arguments) {
+        sum += arguments[a];
+    }
+    return sum;
+}
+
+var result5 = summe(1,2,3);
+console.log(result5 === 6);</code></pre>
+                    </section>
+            </section>
+
+                <section>
+                    <section>
+                    <h1>Scopes</h1>
+                    </section>
+                    <section>
+                        <h2>So nicht!</h2>
+    <pre><code class="javascript" contenteditable>
+{
+    var huch = "Ich bin noch da";
+}
+
+console.log(huch); // Ich bin noch da
+    </code></pre>
+
+                    </section>
+                    <section>
+                        <h2>So!</h2>
+    <pre><code class="javascript" contenteditable>
+(function () {
+    var achso = "Ich bin weg";
+}());
+
+console.log(achso); // ReferenceError
+    </code></pre>
+                <p><a target="_blank" href="http://benalman.com/news/2010/11/immediately-invoked-function-expression/">Immediately-Invoked Function Expression (IIFE)</a></p>
+
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                    <h2>Exception Handling</h2>
+    <pre><code class="javascript" contenteditable>
+try {
+    throw "Error";
+    // or
+    throw new Error("Error");
+} catch (e) {
+    console.log("Caught: " + e)
+} finally {
+    console.log("Always")
+}
+    </code></pre>
+                    </section>
+
+                </section>
+                    <section>
+                        <h2>Übung: Basiswissen</h2>
+                        <ul>
+                            <li>Erzeuge ein Array mit Personen-Objekten mit mindestens den Eigenschaften
+                                <ul>
+                                    <li>Name
+                                    <li>Alter
+                                    <li>Geschlecht
+                                </ul>
+                            </li>
+                            <li>Gib alle Personen nacheinander aus
+                                <ul>
+                                    <li>Erstelle eine Funktion, die eine Person formatiert auf der Console ausgibt
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </section>
+                        <section>
                 <section>
                     <h2>Objekte, die Zweite</h2>
                     <ul>
@@ -187,7 +472,7 @@ Person.getLieblingsName() === "Olli";</code></pre>
 
                 <section>
                     <section>
-                        <h2>Übung 3: Typen</h2>
+                        <h2>Übung: Typen</h2>
                         <ol>
                             <li>Schreibe einen Typen für Person
                                 <ul>
@@ -312,7 +597,7 @@ eu.zeigermann.main.run();</code></pre>
                     </section>
                 </section>
                 <section>
-                    <h2>Übung 4: Module</h2>
+                    <h2>Übung: Module</h2>
                     <ol>
                         <li>Schreibe ein Modul, in das du die vorhandenen Typendefinitionen verschiebst. Dieses Modul soll
                             <ul>
@@ -322,6 +607,8 @@ eu.zeigermann.main.run();</code></pre>
                         <li>Schreibe den aufrufenden Code so um, dass er mit den neuen Modulen arbeitet
                     </ol>
                 </section>
+
+
             </div>
 
 		</div>
