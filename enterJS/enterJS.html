@@ -338,20 +338,20 @@ obj.log(); // 10
     </code></pre>
                     </ul>
                 </section>
-                <section>
-                    <h3>Singleton</h3>
-                    <ul>
-                        <li class="fragment">Wie gesehen, kann man in JavaScript Objekte auch ohne einen Typ erzeugen
-                        <li class="fragment">In klassenbasierten Sprachen muss man auch dafür einen Typ erzeugen und darauf achten, dass man nur eine Instanz erzeugen kann
-                        <li class="fragment">Das Pattern dazu heißt <code>Singleton</code>
-                        <li class="fragment">In JavaScript braucht man dieses Pattern nicht
-                        <li class="fragment">Manchmal möchte man allerdings auch mehrere Objekte mit dergleichen oder ähnlichen Struktur erzeugen
-                    </ul>
-                </section>
+                <!--<section>-->
+                    <!--<h3>Singleton</h3>-->
+                    <!--<ul>-->
+                        <!--<li class="fragment">Wie gesehen, kann man in JavaScript Objekte auch ohne einen Typ erzeugen-->
+                        <!--<li class="fragment">In klassenbasierten Sprachen muss man auch dafür einen Typ erzeugen und darauf achten, dass man nur eine Instanz erzeugen kann-->
+                        <!--<li class="fragment">Das Pattern dazu heißt <code>Singleton</code>-->
+                        <!--<li class="fragment">In JavaScript braucht man dieses Pattern nicht-->
+                        <!--<li class="fragment">Manchmal möchte man allerdings auch mehrere Objekte mit dergleichen oder ähnlichen Struktur erzeugen-->
+                    <!--</ul>-->
+                <!--</section>-->
             </section>
             <section>
                 <section>
-                    <h2>Klassische Typen und Vererbung mit JavaScript</h2>
+                    <h2>Typen mit JavaScript</h2>
                     <ul>
                         <li class="fragment">Typen und Konstruktoren sind Mechanismen, um mehrere, strukturell gleiche oder ähnliche Objekte zu erzeugen
                         <li class="fragment">Auch in JavaScript können eigene Typen definiert werden
@@ -376,22 +376,20 @@ obj.log(); // 10
             </section>
             <section>
                 <h2>Setzen des Prototypen aka das Typen-System</h2>
-                <p class="fragment">Der Prototyp kann nicht direkt, aber durch Aufruf von <code>new</code> gesetzt werden
+                <p >Der Prototyp kann nicht direkt, aber durch Aufruf von <code>new</code> gesetzt werden
                 </p>
-    <pre class="fragment"><code class="javascript" contenteditable>
-/** @constructor */
+    <pre class="fragment"><code class="javascript" contenteditable>/** @constructor */
 function Person(name) {
     this.name = name;
-}
+}</code></pre>
+    <pre class="fragment"><code class="javascript" contenteditable>// Methode
 Person.prototype.getName = function() {
     return this.name;
-};
-
+};</code></pre>
+    <pre ><code class="javascript" contenteditable>
 var olli = new Person('Olli');
 olli.getName() === 'Olli';
-olli instanceof Object;
-olli instanceof Person;
-</code></pre>
+    </code></pre>
             </section>
 
             <section>
@@ -404,6 +402,39 @@ olli instanceof Person;
                     <li class="fragment">das neue Objekt wird implizit zurückgegeben (wenn die Funktion kein explizites <code>return</code> hat)
                 </ol>
             </section>
+
+            <section>
+                <h2>"Typsystem"</h2>
+                <p>Ein Objekt ist <code>instanceof</code> aller seiner Prototypen
+                </p>
+    <pre><code class="javascript" contenteditable>var olli = new Person('Olli');
+olli.__proto__ === Person.prototype;
+olli.constructor === Person;
+olli instanceof Object;
+olli instanceof Person;
+    </code></pre>
+            </section>
+                <section>
+                <h3>Iterieren über Map / Objekt</h3>
+<pre><code class="javascript" contenteditable>function MyType() {
+    this.item1 = 'key1';
+    this.item2 = 'key2';
+}
+MyType.prototype.method1 = function () { }
+
+var map = new MyType();
+for (var key in map) {
+    if (map.hasOwnProperty(key)) {
+        console.log("Own property: " + key + ": " + map[key]);
+    } else {
+        console.log("Inherited property: " + key + ": " + map[key]);
+    }
+}
+// => Own property: item1: key1
+// => Own property: item2: key2
+// => Inherited property: method1: function () {}
+</code></pre>
+                </section>
         </section>
                 <section>
                     <section>
