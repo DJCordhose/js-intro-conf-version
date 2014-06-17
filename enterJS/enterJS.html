@@ -12,13 +12,21 @@
 		<link rel="stylesheet" href="../reveal.js/css/reveal.min.css">
         <link rel="stylesheet" href="../reveal.js/css/theme/simple.css" id="theme">
 
-		<!-- For syntax highlighting -->
-		<link rel="stylesheet" href="../reveal.js/lib/css/zenburn.css">
 
-		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
-		<script>
-			document.write( '<link rel="stylesheet" href="../reveal.js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
-		</script>
+        <!-- Uncomment for presentation -->
+        <style>
+            pre code {
+                display: block;
+                padding: 0.5em;
+                background: #FFFFFF;
+                color: #000000;
+            }
+        </style>
+
+        <!-- Uncomment for PDF generation -->
+        <!-- and add ?print-pdf to url -->
+        <!--<link rel="stylesheet" href="../reveal.js/css/print/pdf.css">-->
+        <!--<link rel="stylesheet" href="../reveal.js/lib/css/zenburn.css">-->
 
 		<!--[if lt IE 9]>
         <script src="../reveal.js/lib/js/html5shiv.js"></script>
