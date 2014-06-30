@@ -321,16 +321,17 @@ obj.log(); // 10
     </code></pre>
                     </ul>
                 </section>
-                <!--<section>-->
-                    <!--<h3>Singleton</h3>-->
-                    <!--<ul>-->
-                        <!--<li class="fragment">Wie gesehen, kann man in JavaScript Objekte auch ohne einen Typ erzeugen-->
-                        <!--<li class="fragment">In klassenbasierten Sprachen muss man auch dafür einen Typ erzeugen und darauf achten, dass man nur eine Instanz erzeugen kann-->
-                        <!--<li class="fragment">Das Pattern dazu heißt <code>Singleton</code>-->
-                        <!--<li class="fragment">In JavaScript braucht man dieses Pattern nicht-->
-                        <!--<li class="fragment">Manchmal möchte man allerdings auch mehrere Objekte mit dergleichen oder ähnlichen Struktur erzeugen-->
-                    <!--</ul>-->
-                <!--</section>-->
+                <section>
+                    <h2>Call / Apply</h2>
+                    <ul>
+                    <li class="fragment">call und apply sind Methoden auf Funktionen
+                    <li class="fragment">Erlauben das freie Binden an einen anderen Kontext
+    <li class="fragment"><pre><code class="javascript" contenteditable>var field = "Reingelegt";
+obj.log.call(this);
+// => ???
+</code></pre>
+                    </ul>
+                </section>
             </section>
             <section>
                 <section>
@@ -391,8 +392,7 @@ olli.getName() === 'Olli';
                 <p>Ein Objekt ist <code>instanceof</code> aller seiner Prototypen
                 </p>
     <pre><code class="javascript" contenteditable>var olli = new Person('Olli');
-olli.__proto__ === Person.prototype;
-olli.constructor === Person;
+Object.getPrototypeOf(olli) === Person.prototype;
 olli instanceof Object;
 olli instanceof Person;
     </code></pre>
@@ -457,16 +457,6 @@ olli.gender === 'Male';
 olli instanceof Male;
 olli instanceof Person;
 olli instanceof Object;</code></pre>
-                    </section>
-                    <section>
-                        <h3>Konstruktur ohne störende Seiteneffekte</h3>
-                        <p>Das Prototype-Property der Konstruktor-Funktion dient als Vorlage für die Vererbungskette</p>
-    <pre><code class="javascript" contenteditable>function _extends(_sub, _super) {
-    var IntermediateConstructor = function () {};
-        IntermediateConstructor.prototype = _super.prototype;
-    _sub.prototype = new IntermediateConstructor();
-    _sub.prototype.constructor = _sub;
-} </code></pre>
                     </section>
                 </section>
                                 <section>
@@ -552,8 +542,7 @@ console.log(inner());</code></pre>
                     </section>
                     <section>
                         <h3>Revealing Module Pattern</h3>
-<pre><code class="javascript" contenteditable>var humanresources = {};
-(function () {
+<pre><code class="javascript" contenteditable>var humanresources = (function () {
     function InternalStuff() {
     }
 
@@ -562,7 +551,9 @@ console.log(inner());</code></pre>
         // uses internal stuff
     }
 
-    humanresources.Person = Person;
+    return {
+        Person: Person
+    };
 })();
 </code></pre>
                     </section>
@@ -572,43 +563,6 @@ console.log(inner());</code></pre>
 olli.name === 'Olli';
 // TypeError: undefined is not a function
 new humanresources.InternalStuff();</code></pre>
-                </section>
-                    <section>
-                        <h3>Namespaces</h3>
-<pre><code class="javascript" contenteditable>var eu = eu || {};
-eu.zeigermann = {};
-eu.zeigermann.person = {};
-(function (person) {
-    // Constructor
-    function Person(name) {
-        this.name = name;
-    }
-
-    // Factory
-    function create(name) {
-        return new Person(name);
-    }
-
-    // Export der Factory-Methode
-    person.createPerson = create;
-})(eu.zeigermann.person);
-</code></pre>
-                    </section>
-                    <section>
-                        <h3>Import</h3>
-<pre><code class="javascript" contenteditable>eu.zeigermann.main = {};
-(function (main, person) {
-    function run() {
-        var olli = person.createPerson("Olli");
-        console.log(olli.name); // => "Olli"
-
-        console.log(person.Person); // => undefined
-    }
-    main.run = run;
-})(eu.zeigermann.main, eu.zeigermann.person);
-
-eu.zeigermann.main.run();</code></pre>
-                    </section>
                 </section>
                 <section>
                     <h2>Übung: Module</h2>
