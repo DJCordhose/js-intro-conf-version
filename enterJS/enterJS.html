@@ -12,13 +12,21 @@
 		<link rel="stylesheet" href="../reveal.js/css/reveal.min.css">
         <link rel="stylesheet" href="../reveal.js/css/theme/simple.css" id="theme">
 
-		<!-- For syntax highlighting -->
-		<link rel="stylesheet" href="../reveal.js/lib/css/zenburn.css">
 
-		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
-		<script>
-			document.write( '<link rel="stylesheet" href="../reveal.js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
-		</script>
+        <!-- Uncomment for presentation -->
+        <style>
+            pre code {
+                display: block;
+                padding: 0.5em;
+                background: #FFFFFF;
+                color: #000000;
+            }
+        </style>
+
+        <!-- Uncomment for PDF generation -->
+        <!-- and add ?print-pdf to url -->
+        <!--<link rel="stylesheet" href="../reveal.js/css/print/pdf.css">-->
+        <!--<link rel="stylesheet" href="../reveal.js/lib/css/zenburn.css">-->
 
 		<!--[if lt IE 9]>
         <script src="../reveal.js/lib/js/html5shiv.js"></script>
@@ -32,30 +40,39 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 
-				<section>
-					<h2>Einführung in JavaScript für Java-Entwickler</h2>
-					<p>
-						<small><a href="mailto:oliver.zeigermann@gmail.com">Oliver Zeigermann</a> / <a href="http://zeigermann.eu">http://zeigermann.eu</a></small>
-					</p>
-                    <p>
-                        <small>Oliver Ochs TODO</small>
-                    </p>
-				</section>
+            <section>
+                <h2>Einführung in JavaScript für Java- und C#-Entwickler</h2>
+                <p>
+                    <a href="mailto:oliver.zeigermann@gmail.com">Oliver Zeigermann</a> | <a href="http://zeigermann.eu">http://zeigermann.eu</a>
+                </p>
+                <p>
+                    <a href="mailto:oliver.ochs@holisticon.de">Oliver Ochs</a> | <a href="http://www.holisticon.de">http://www.holisticon.de</a>
+                </p>
+                <p>Online-Version: <a href="http://djcordhose.github.io/js-intro-conf-version/enterJS/enterJS.html">http://djcordhose.github.io/js-intro-conf-version/enterJS/enterJS.html</a></p>
+            </section>
 
-                <section>
-                    <h2>Oliver Ochs TODO</h2>
-                </section>
-                <section>
-                    <h2>Oliver Zeigermann</h2>
-                    <img src="olli.JPG" height="200">
-                    <ul>
-                        <li><a href="http://zeigermann.eu">http://zeigermann.eu</a>
-                        <li><a href="https://twitter.com/DJCordhose">@DJCordhose</a>
-                        <li><a href="https://github.com/DJCordhose">https://github.com/DJCordhose</a>
-                        <li><a href="http://javatojavascript.blogspot.de/">javatojavascript.blogspot.de</a>
-                        <li><a href="http://www.oose.de/m/oliver-zeigermann">www.oose.de/m/oliver-zeigermann</a>
-                    </ul>
-                </section>
+            <section>
+                <h2>Oliver Ochs</h2>
+                <img src="oliver.png" height="200">
+                <ul>
+                    <li><a href="http://www.holisticon.de">www.holisticon.de</a>
+                    <li><a href="https://twitter.com/oochs">@oochs</a> | <a href="https://twitter.com/simonox">@simonox</a>
+                    <li><a href="https://github.com/Holisticon">github.com/Holisticon</a> | <a href="https://github.com/simonox">github.com/simonox</a></li>
+                    <li><a href="http://www.holisticon.de/blog">holisticon.de/blog</a> | <a href="http://soup.information-architects.de/">information-architects.de</a></li>
+
+                </ul>
+            </section>
+            <section>
+                <h2>Oliver Zeigermann</h2>
+                <img src="olli.jpg" height="200">
+                <ul>
+                    <li><a href="http://zeigermann.eu">http://zeigermann.eu</a>
+                    <li><a href="https://twitter.com/DJCordhose">@DJCordhose</a>
+                    <li><a href="https://github.com/DJCordhose">https://github.com/DJCordhose</a>
+                    <li><a href="http://javatojavascript.blogspot.de/">javatojavascript.blogspot.de</a>
+                    <li><a href="http://www.oose.de/m/oliver-zeigermann">www.oose.de/m/oliver-zeigermann</a>
+                </ul>
+            </section>
                 <section>
                     <section>
                         <h1>Hello World</h1>
@@ -106,6 +123,13 @@ node -e "console.log('Hello World');"
                         <h2>Hello World #4</h2>
                         <img src="Devtools-Screenshot.png">
                     </section>
+                    <section>
+                        <h2>Hello World #5</h2>
+                        <img src="JS_Bin.png">
+                        <br>
+                        <a href="http://jsbin.com/sagub/1/edit?js,console" target="_blank">JS Bin Öffnen</a>
+                    </section>
+
                 </section>
 
                 <section>
@@ -119,27 +143,7 @@ console.log(map.feld1); // Huhu
 console.log(map["zweites$Feld"]); // Auch sowas geht!
 
 map.hund = "Ganz neu geht auch";
-map.f = function() { return "Aha!" };
-
-delete map.hund; // löschen
-console.log(map.hund); // undefined</code></pre>
-                </section>
-
-                <section>
-                    <h2>Array</h2>
-                        <pre><code class="javascript" contenteditable>
-var array = ["a", "b", "c"];
-var el = array[2];
-array[1] = 20;
-typeof array === "object";
-// fügt die 4 am Ende hinzu
-array.push(4);
-// An Position 1 werden 2 Elemente entfernt und zurück gegeben
-array.splice(1, 2);
-// An Position 1 werden 0 Elemente entfernt und zurück gegeben
-// Zudem wird an Position 1 "x" hinzugefügt
-array.splice(1, 0, "x");
-                        </code></pre>
+</code></pre>
                 </section>
                 <section>
                     <h2>Typen</h2>
@@ -159,6 +163,18 @@ var func = function() {};
 typeof func === "function";
 
 typeof michGibtEsNicht === "undefined";</code></pre>
+                </section>
+
+                <section>
+                    <h2>Array</h2>
+                        <pre><code class="javascript" contenteditable>
+var array = ["a", "b", "c"];
+var el = array[2];
+array[1] = 20;
+typeof array === "object";
+// fügt die 4 am Ende hinzu
+array.push(4);
+                        </code></pre>
                 </section>
 
                 <section>
@@ -209,41 +225,8 @@ result1 === 3;
                         </code></pre>
                 </section>
 
-                <section>
-                    <h2>Optionale Parameter</h2>
-                        <pre><code class="javascript" contenteditable>function f1(p1) {
-    if (typeof p1 === 'undefined') {
-        return null;
-    } else {
-        return p1;
-    }
-}
-
-var result1 = f1(1);
-console.log(result1 === 1);
-
-var result2 = f1();
-console.log(result2 === null);</code></pre>
-                </section>
-                <section>
-                    <h2>Varargs #1</h2>
-                    <pre><code class="javascript" contenteditable>function f2() {
-    // "arguments" enthält immer alle Argumente der Funktion
-    if (typeof arguments[0] === 'undefined') {
-        return null;
-    } else {
-        return arguments[0];
-    }
-}
-
-var result3 = f2(1);
-console.log(result3 === 1);
-
-var result4 = f2();
-console.log(result4 === null);</code></pre>
-                </section>
                     <section>
-                        <h2>Varargs #2</h2>
+                        <h2>Varargs</h2>
                     <pre><code class="javascript" contenteditable>function summe() {
     var sum = 0;
     for (var a in arguments) {
@@ -315,7 +298,7 @@ try {
                             </li>
                             <li>Gib alle Personen nacheinander aus
                                 <ul>
-                                    <li>Erstelle eine Funktion, die eine Person formatiert auf der Console ausgibt
+                                    <li>Erstelle eine Funktion, die eine Person auf der Console ausgibt
                                 </ul>
                             </li>
 
@@ -339,19 +322,20 @@ obj.log(); // 10
                     </ul>
                 </section>
                 <section>
-                    <h3>Singleton</h3>
+                    <h2>Call / Apply</h2>
                     <ul>
-                        <li class="fragment">Wie gesehen, kann man in JavaScript Objekte auch ohne einen Typ erzeugen
-                        <li class="fragment">In klassenbasierten Sprachen muss man auch dafür einen Typ erzeugen und darauf achten, dass man nur eine Instanz erzeugen kann
-                        <li class="fragment">Das Pattern dazu heißt <code>Singleton</code>
-                        <li class="fragment">In JavaScript braucht man dieses Pattern nicht
-                        <li class="fragment">Manchmal möchte man allerdings auch mehrere Objekte mit dergleichen oder ähnlichen Struktur erzeugen
+                    <li class="fragment">call und apply sind Methoden auf Funktionen
+                    <li class="fragment">Erlauben das freie Binden an einen anderen Kontext
+    <li class="fragment"><pre><code class="javascript" contenteditable>var field = "Reingelegt";
+obj.log.call(this);
+// => ???
+</code></pre>
                     </ul>
                 </section>
             </section>
             <section>
                 <section>
-                    <h2>Klassische Typen und Vererbung mit JavaScript</h2>
+                    <h2>Typen mit JavaScript</h2>
                     <ul>
                         <li class="fragment">Typen und Konstruktoren sind Mechanismen, um mehrere, strukturell gleiche oder ähnliche Objekte zu erzeugen
                         <li class="fragment">Auch in JavaScript können eigene Typen definiert werden
@@ -376,22 +360,20 @@ obj.log(); // 10
             </section>
             <section>
                 <h2>Setzen des Prototypen aka das Typen-System</h2>
-                <p class="fragment">Der Prototyp kann nicht direkt, aber durch Aufruf von <code>new</code> gesetzt werden
+                <p >Der Prototyp kann nicht direkt, aber durch Aufruf von <code>new</code> gesetzt werden
                 </p>
-    <pre class="fragment"><code class="javascript" contenteditable>
-/** @constructor */
+    <pre class="fragment"><code class="javascript" contenteditable>/** @constructor */
 function Person(name) {
     this.name = name;
-}
+}</code></pre>
+    <pre class="fragment"><code class="javascript" contenteditable>// Methode
 Person.prototype.getName = function() {
     return this.name;
-};
-
+};</code></pre>
+    <pre ><code class="javascript" contenteditable>
 var olli = new Person('Olli');
 olli.getName() === 'Olli';
-olli instanceof Object;
-olli instanceof Person;
-</code></pre>
+    </code></pre>
             </section>
 
             <section>
@@ -404,6 +386,38 @@ olli instanceof Person;
                     <li class="fragment">das neue Objekt wird implizit zurückgegeben (wenn die Funktion kein explizites <code>return</code> hat)
                 </ol>
             </section>
+
+            <section>
+                <h2>"Typsystem"</h2>
+                <p>Ein Objekt ist <code>instanceof</code> aller seiner Prototypen
+                </p>
+    <pre><code class="javascript" contenteditable>var olli = new Person('Olli');
+Object.getPrototypeOf(olli) === Person.prototype;
+olli instanceof Object;
+olli instanceof Person;
+    </code></pre>
+            </section>
+                <section>
+                <h3>Iterieren über Map / Objekt</h3>
+<pre><code class="javascript" contenteditable>function MyType() {
+    this.item1 = 'key1';
+    this.item2 = 'key2';
+}
+MyType.prototype.method1 = function () { }
+
+var map = new MyType();
+for (var key in map) {
+    if (map.hasOwnProperty(key)) {
+        console.log("Own property: " + key + ": " + map[key]);
+    } else {
+        console.log("Inherited property: " + key + ": " + map[key]);
+    }
+}
+// => Own property: item1: key1
+// => Own property: item2: key2
+// => Inherited property: method1: function () {}
+</code></pre>
+                </section>
         </section>
                 <section>
                     <section>
@@ -443,16 +457,6 @@ olli.gender === 'Male';
 olli instanceof Male;
 olli instanceof Person;
 olli instanceof Object;</code></pre>
-                    </section>
-                    <section>
-                        <h3>Konstruktur ohne störende Seiteneffekte</h3>
-                        <p>Das Prototype-Property der Konstruktor-Funktion dient als Vorlage für die Vererbungskette</p>
-    <pre><code class="javascript" contenteditable>function _extends(_sub, _super) {
-    var IntermediateConstructor = function () {};
-        IntermediateConstructor.prototype = _super.prototype;
-    _sub.prototype = new IntermediateConstructor();
-    _sub.prototype.constructor = _sub;
-} </code></pre>
                     </section>
                 </section>
                                 <section>
@@ -538,8 +542,7 @@ console.log(inner());</code></pre>
                     </section>
                     <section>
                         <h3>Revealing Module Pattern</h3>
-<pre><code class="javascript" contenteditable>var humanresources = {};
-(function () {
+<pre><code class="javascript" contenteditable>var humanresources = (function () {
     function InternalStuff() {
     }
 
@@ -548,7 +551,9 @@ console.log(inner());</code></pre>
         // uses internal stuff
     }
 
-    humanresources.Person = Person;
+    return {
+        Person: Person
+    };
 })();
 </code></pre>
                     </section>
@@ -558,43 +563,6 @@ console.log(inner());</code></pre>
 olli.name === 'Olli';
 // TypeError: undefined is not a function
 new humanresources.InternalStuff();</code></pre>
-                </section>
-                    <section>
-                        <h3>Namespaces</h3>
-<pre><code class="javascript" contenteditable>var eu = eu || {};
-eu.zeigermann = {};
-eu.zeigermann.person = {};
-(function (person) {
-    // Constructor
-    function Person(name) {
-        this.name = name;
-    }
-
-    // Factory
-    function create(name) {
-        return new Person(name);
-    }
-
-    // Export der Factory-Methode
-    person.createPerson = create;
-})(eu.zeigermann.person);
-</code></pre>
-                    </section>
-                    <section>
-                        <h3>Import</h3>
-<pre><code class="javascript" contenteditable>eu.zeigermann.main = {};
-(function (main, person) {
-    function run() {
-        var olli = person.createPerson("Olli");
-        console.log(olli.name); // => "Olli"
-
-        console.log(person.Person); // => undefined
-    }
-    main.run = run;
-})(eu.zeigermann.main, eu.zeigermann.person);
-
-eu.zeigermann.main.run();</code></pre>
-                    </section>
                 </section>
                 <section>
                     <h2>Übung: Module</h2>
