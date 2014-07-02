@@ -41,27 +41,13 @@
 			<div class="slides">
 
             <section>
-                <h2>Einführung in JavaScript für Java- und C#-Entwickler</h2>
+                <h2>Einführung in JavaScript für Java-Entwickler</h2>
                 <p>
                     <a href="mailto:oliver.zeigermann@gmail.com">Oliver Zeigermann</a> | <a href="http://zeigermann.eu">http://zeigermann.eu</a>
                 </p>
-                <p>
-                    <a href="mailto:oliver.ochs@holisticon.de">Oliver Ochs</a> | <a href="http://www.holisticon.de">http://www.holisticon.de</a>
-                </p>
-                <p>Online-Version: <a href="http://djcordhose.github.io/js-intro-conf-version/enterJS/enterJS.html">http://djcordhose.github.io/js-intro-conf-version/enterJS/enterJS.html</a></p>
+                <p>Online-Version: <a href="http://djcordhose.github.io/js-intro-conf-version/wjax/wjax.html">http://djcordhose.github.io/js-intro-conf-version/wjax/wjax.html</a></p>
             </section>
 
-            <section>
-                <h2>Oliver Ochs</h2>
-                <img src="oliver.png" height="200">
-                <ul>
-                    <li><a href="http://www.holisticon.de">www.holisticon.de</a>
-                    <li><a href="https://twitter.com/oochs">@oochs</a> | <a href="https://twitter.com/simonox">@simonox</a>
-                    <li><a href="https://github.com/Holisticon">github.com/Holisticon</a> | <a href="https://github.com/simonox">github.com/simonox</a></li>
-                    <li><a href="http://www.holisticon.de/blog">holisticon.de/blog</a> | <a href="http://soup.information-architects.de/">information-architects.de</a></li>
-
-                </ul>
-            </section>
             <section>
                 <h2>Oliver Zeigermann</h2>
                 <img src="olli.jpg" height="200">
@@ -70,7 +56,6 @@
                     <li><a href="https://twitter.com/DJCordhose">@DJCordhose</a>
                     <li><a href="https://github.com/DJCordhose">https://github.com/DJCordhose</a>
                     <li><a href="http://javatojavascript.blogspot.de/">javatojavascript.blogspot.de</a>
-                    <li><a href="http://www.oose.de/m/oliver-zeigermann">www.oose.de/m/oliver-zeigermann</a>
                 </ul>
             </section>
                 <section>
@@ -224,9 +209,41 @@ var result1 = f1(1,2);
 result1 === 3;
                         </code></pre>
                 </section>
+                <section>
+                    <h2>Optionale Parameter</h2>
+                        <pre><code class="javascript" contenteditable>function f1(p1) {
+    if (typeof p1 === 'undefined') {
+        return null;
+    } else {
+        return p1;
+    }
+}
 
+var result1 = f1(1);
+console.log(result1 === 1);
+
+var result2 = f1();
+console.log(result2 === null);</code></pre>
+                </section>
+                <section>
+                    <h2>Varargs #1</h2>
+                    <pre><code class="javascript" contenteditable>function f2() {
+    // "arguments" enthält immer alle Argumente der Funktion
+    if (typeof arguments[0] === 'undefined') {
+        return null;
+    } else {
+        return arguments[0];
+    }
+}
+
+var result3 = f2(1);
+console.log(result3 === 1);
+
+var result4 = f2();
+console.log(result4 === null);</code></pre>
+                </section>
                     <section>
-                        <h2>Varargs</h2>
+                        <h2>Varargs #2</h2>
                     <pre><code class="javascript" contenteditable>function summe() {
     var sum = 0;
     for (var a in arguments) {
@@ -238,7 +255,7 @@ result1 === 3;
 var result5 = summe(1,2,3);
 console.log(result5 === 6);</code></pre>
                     </section>
-            </section>
+                </section>
 
                 <section>
                     <section>
@@ -542,18 +559,17 @@ console.log(inner());</code></pre>
                     </section>
                     <section>
                         <h3>Revealing Module Pattern</h3>
-<pre><code class="javascript" contenteditable>var humanresources = (function () {
+<pre><code class="javascript" contenteditable>var humanresources = {};
+(function () {
     function InternalStuff() {
     }
 
     function Person(name) {
         this.name = name;
-        // uses internal stuff
+        this.inner = new InnerStuff();
     }
 
-    return {
-        Person: Person
-    };
+    humanresources.Person = Person;
 })();
 </code></pre>
                     </section>
@@ -564,12 +580,116 @@ olli.name === 'Olli';
 // TypeError: undefined is not a function
 new humanresources.InternalStuff();</code></pre>
                 </section>
+                    <section>
+                        <h3>Namespaces</h3>
+<pre><code class="javascript" contenteditable>var eu = eu || {};
+eu.zeigermann = eu.zeigermann || {};
+eu.zeigermann.person = eu.zeigermann.person || {};
+(function (person) {
+    // Constructor
+    function Person(name) {
+        this.name = name;
+    }
+
+    // Factory
+    function create(name) {
+        return new Person(name);
+    }
+
+    // Export der Factory-Methode
+    person.createPerson = create;
+})(eu.zeigermann.person);
+</code></pre>
+                    </section>
+                    <section>
+                        <h3>Import</h3>
+<pre><code class="javascript" contenteditable>eu.zeigermann.main = {};
+(function (main, person) {
+    function run() {
+        var olli = person.createPerson("Olli");
+        console.log(olli.name); // => "Olli"
+
+        console.log(person.Person); // => undefined
+    }
+    main.run = run;
+})(eu.zeigermann.main, eu.zeigermann.person);
+
+eu.zeigermann.main.run();</code></pre>
+                    </section>
+                </section>
+                <section>
+                <section>
+                    <h2>Modul-Systeme</h2>
+                </section>
+                    <section>
+        <h3>Es gibt zwei grundsätzlich unterschiedliche Modul-Systeme als Defacto-Standard</h3>
+        <ul>
+            <li class="fragment">AMD
+                <ul>
+                    <li class="fragment">Module werden nicht blockierend und potentiell asynchron geladen
+                    <li class="fragment">Module werden über bower oder manuell installiert
+                    <li class="fragment">Verwendung auf Client-Seite
+                    <li class="fragment">Default-Implementierung: RequireJS
+                    <!--<li class="fragment">Für blockierendes Laden auf Server-Seite: r.js-->
+                </ul>
+            </li>
+            <li class="fragment">CommonJS
+                <ul>
+                    <li class="fragment">Module werden blockierend und synchron geladen
+                    <li class="fragment">Module werden über npm installiert
+                    <li class="fragment">Verwendung auf Server-Seite
+                    <!--<li class="fragment">Für nicht blockierendes Laden auf Client-Seite: Browserify-->
+                </ul>
+            </li>
+            <li class="fragment">Beide Modul-Systeme können über r.js / Browserify auch auf Server / Client benutzt werden
+        </ul>
+    </section>
+                    <section>
+        <h3>Definieren eines commonJS Moduls bei node</h3>
+<pre><code class="javascript" contenteditable>// in der Datei "eater.js"
+var eatThis = function (name) {
+    console.log(name);
+};
+exports.eatThis = eatThis;</code></pre>
+    </section>
+                    <section>
+                        <h3>Benutzen eines commonJS Moduls bei node</h3>
+<pre><code class="javascript" contenteditable>var eaterModule = require("eater");
+
+eaterModule.eatThis(name);
+</code></pre>
+                    </section>
+                                    <section>
+                        <h4>Definieren eines AMD Moduls mit requireJS</h4>
+<pre><code class="javascript" contenteditable>// Ein Modul pro Datei:
+// js/modules/accounting.js
+define(function () {
+    return {
+        getIdNumberForName: function(name) {
+            // ...
+        }
+    };
+});
+</code></pre>
+                    </section>
+                    <section>
+                        <h4>Benutzen eines AMD Moduls mit requireJS</h4>
+<pre><code class="javascript" contenteditable>
+require(['js/modules/accounting'], function (Accounting) {
+    var name = // ...
+    var id = Accounting.getIdNumberForName(name);
+    // ...
+});
+</code></pre>
+                    </section>
+</section>
+
                 <section>
                     <h2>Übung: Module</h2>
                     <ol>
                         <li>Schreibe ein Modul, in das du die vorhandenen Typendefinitionen verschiebst. Dieses Modul soll
                             <ul>
-                                <li>nach außen nur den <code>Customer</code>-Typen exportieren
+                                <li>nach außen nur den <code>Customer</code>- oder den <code>Person</code>-Typen exportieren
                             </ul>
                         </li>
                         <li>Schreibe den aufrufenden Code so um, dass er mit den neuen Modulen arbeitet
