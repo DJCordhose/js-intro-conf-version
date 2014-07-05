@@ -1,0 +1,469 @@
+<!--http://localhost:63342/JavaScript%20Training/#/-->
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+
+		<title>JavaScript-Sprachgrundlagen für C#-Entwickler</title>
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<link rel="stylesheet" href="../reveal.js/css/reveal.min.css">
+        <link rel="stylesheet" href="../reveal.js/css/theme/simple.css" id="theme">
+
+
+        <!-- Uncomment for presentation -->
+        <style>
+            pre code {
+                display: block;
+                padding: 0.5em;
+                background: #FFFFFF;
+                color: #000000;
+            }
+        </style>
+
+        <!-- Uncomment for PDF generation -->
+        <!-- and add ?print-pdf to url -->
+        <!--<link rel="stylesheet" href="../reveal.js/css/print/pdf.css">-->
+        <!--<link rel="stylesheet" href="../reveal.js/lib/css/zenburn.css">-->
+
+		<!--[if lt IE 9]>
+        <script src="../reveal.js/lib/js/html5shiv.js"></script>
+        <![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+            <section>
+                <h2>JavaScript-Sprachgrundlagen für C#-Entwickler</h2>
+                <p>
+                    <a href="mailto:oliver.zeigermann@gmail.com">Oliver Zeigermann</a> | <a href="http://zeigermann.eu">http://zeigermann.eu</a>
+                </p>
+                <p>Online-Version: <a href="http://djcordhose.github.io/js-intro-conf-version/basta/basta.html">http://djcordhose.github.io/js-intro-conf-version/basta/basta.html</a></p>
+            </section>
+
+            <section>
+                <img src="Twitter_2017_JavaScript.png" height="700">
+            </section>
+            <section>
+                <img src="Twitter-Github-Repos-JS.png" height="500">
+                <p><a target="_blank" href="http://redmonk.com/dberkholz/2014/05/02/github-language-trends-and-the-fragmenting-landscape">http://redmonk.com/dberkholz/2014/05/02/github-language-trends-and-the-fragmenting-landscape</a></p>
+            </section>
+            <section>
+                <h2>Oliver Zeigermann</h2>
+                <img src="olli.jpg" height="200">
+                <ul>
+                    <li><a href="http://zeigermann.eu">http://zeigermann.eu</a>
+                    <li><a href="https://twitter.com/DJCordhose">@DJCordhose</a>
+                    <li><a href="https://github.com/DJCordhose">https://github.com/DJCordhose</a>
+                    <li><a href="http://javatojavascript.blogspot.de/">javatojavascript.blogspot.de</a>
+                </ul>
+            </section>
+                <section>
+                    <section>
+                        <h1>Hello World</h1>
+                    </section>
+                    <section>
+                        <h2>Hello World #1</h2>
+                        <pre><code class="xml" contenteditable>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Hello World!&lt;/title&gt;
+  &lt;/head&gt;
+    &lt;body&gt;
+      &lt;div id="log">&lt;/div>
+      &lt;script&gt;
+          var element = document.getElementById("log");
+          element.innerHTML = "&lt;h1>Hello World&lt;/h1>";
+      &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+                        </code></pre>
+                        <a href="helloworld2.html" target="_blank">Run</a>
+                    </section>
+                    <section>
+                        <h2>Hello World #2</h2>
+                        <pre><code class="javascript" contenteditable>
+node -e "console.log('Hello World');"
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Hello World #3</h2>
+                        <img src="Devtools-Screenshot.png">
+                    </section>
+                </section>
+
+                <section>
+                    <h2>Object</h2>
+                        <pre><code class="javascript" contenteditable>var map = {
+    feld1: 'Huhu',
+    zweites$Feld: "Auch sowas geht!"
+};
+console.log(typeof map === "object"); // true
+console.log(map.feld1); // Huhu
+console.log(map["zweites$Feld"]); // Auch sowas geht!
+
+map.hund = "Ganz neu geht auch";
+</code></pre>
+                </section>
+                <section>
+                    <h2>Typen</h2>
+                        <pre><code class="javascript" contenteditable>var string = "String";
+typeof string === "string";
+
+var int = 1;
+typeof int === "number";
+
+var float = 1.0;
+typeof float === "number";
+
+var bool = true;
+typeof bool === "boolean";
+
+var func = function() {};
+typeof func === "function";
+
+typeof michGibtEsNicht === "undefined";</code></pre>
+                </section>
+
+                <section>
+                    <h2>Der langweilige Teil</h2>
+                    <p>Spracheigenschaften, die so ähnlich sind wie in C#</p>
+                    <ul>
+                        <li class="fragment">Kontrollstrukturen
+                        <li class="fragment">Strings
+                        <li class="fragment">Arrays
+                        <li class="fragment">Exceptions
+                        <li class="fragment">Garbage Collection
+                    </ul>
+                </section>
+                <section>
+                <section>
+                    <h2>Funktionen</h2>
+                        <pre><code class="javascript" contenteditable>
+function f2() {
+    console.log("Called!");
+}
+var result2 = f2();
+result2 === undefined;
+
+var f1 = function(p1, p2) {
+    return p1 + p2;
+};
+var result1 = f1(1,2);
+result1 === 3;
+                        </code></pre>
+                </section>
+
+                    <section>
+                        <h2>Varargs</h2>
+                    <pre><code class="javascript" contenteditable>function summe() {
+    var sum = 0;
+    for (var a in arguments) {
+        sum += arguments[a];
+    }
+    return sum;
+}
+
+var result5 = summe(1,2,3);
+console.log(result5 === 6);</code></pre>
+                    </section>
+            <section>
+                    <h2>Funktionen höherer Ordnung</h2>
+    <pre><code class="javascript" contenteditable>var array = [1,2,3];
+
+array.forEach(function(e) { console.log(e); });
+
+array.filter(function(e) { return e > 2; });
+
+array.map(function(e) { return e + 100; });
+
+array.reduce(function(reduced, current) {
+    return reduced + current;
+}, 100);</code></pre>
+                </section>
+                </section>
+
+                <section>
+                    <section>
+                    <h1>Scopes</h1>
+                    </section>
+                    <section>
+                        <h2>So nicht!</h2>
+    <pre><code class="javascript" contenteditable>
+{
+    var huch = "Ich bin noch da";
+}
+
+console.log(huch); // Ich bin noch da
+    </code></pre>
+
+                    </section>
+                    <section>
+                        <h2>So!</h2>
+    <pre><code class="javascript" contenteditable>
+(function () {
+    var achso = "Ich bin weg";
+}());
+
+console.log(achso); // ReferenceError
+    </code></pre>
+                <p><a target="_blank" href="http://benalman.com/news/2010/11/immediately-invoked-function-expression/">Immediately-Invoked Function Expression (IIFE)</a></p>
+
+                    </section>
+                </section>
+
+
+                </section>
+                        <section>
+                <section>
+                    <h2>Objekte, die Zweite</h2>
+                    <ul>
+                        <li class="fragment">Objekte können auch Funktionen als Properties haben
+                        <li class="fragment">Diese funktionieren dann wie Methoden, d.h. <code>this</code> ist an das Objekt gebunden über das sie aufgerufen werden
+    <li class="fragment"><pre><code class="javascript" contenteditable>var obj = {
+    field: 10,
+    log: function() {
+        console.log(this.field);
+    }
+};
+
+obj.log(); // 10
+    </code></pre>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Call / Apply</h2>
+                    <ul>
+                    <li class="fragment">call und apply sind Methoden auf Funktionen
+                    <li class="fragment">Erlauben das freie Binden an einen anderen Kontext
+    <li class="fragment"><pre><code class="javascript" contenteditable>var field = "Reingelegt";
+obj.log.call(this);
+// => ???
+</code></pre>
+                    </ul>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Typen mit JavaScript</h2>
+                    <ul>
+                        <li class="fragment">Typen und Konstruktoren sind Mechanismen, um mehrere, strukturell gleiche oder ähnliche Objekte zu erzeugen
+                        <li class="fragment">Auch in JavaScript können eigene Typen definiert werden
+                        <li class="fragment">Einfachvererbung ist ebenso möglich
+                        <li class="fragment">Der Mechanismus ist nicht direkt in die Sprache eingebaut
+                        <li class="fragment">Stattdessen benutzen wir Best-Practice-Patterns
+                        <li class="fragment">Grundlage ist die prototypische Vererbung
+                    </ul>
+                </section>
+            <section>
+                <h2>Pattern für Typen</h2>
+    <pre class="fragment"><code class="javascript" contenteditable>/** @constructor */
+function Person(name) {
+    this.name = name;
+}</code></pre>
+    <pre class="fragment"><code class="javascript" contenteditable>// Methode
+Person.prototype.getName = function() {
+    return this.name;
+};</code></pre>
+    <pre ><code class="javascript" contenteditable>var olli = new Person('Olli');
+olli.getName() === 'Olli';</code></pre>
+    <pre  class="fragment"><code class="javascript" contenteditable>olli instanceof Object;
+olli instanceof Person;</code></pre>
+            </section>
+            </section>
+
+                <section>
+                    <section>
+                        <h3>Vererbung</h3>
+                        <ol>
+                            <li class="fragment">Typen-Hierarchien und Instanzen nutzen beide Prototypische Vererbung
+                            <li class="fragment">Typen-Hierarchien werden einmal aufgebaut und als Prototypen der Instanzen verwendet
+                            <li class="fragment">Aufruf von Super-Konstruktoren und Super-Methoden über call / apply
+                        </ol>
+                    </section>
+                    <section>
+                        <h3>Vererbung #1</h3>
+    <pre><code class="javascript" contenteditable>function Person(name, gender) {
+    this.name = name;
+    this.gender = gender;
+}
+Person.prototype.getName = function() {
+    return this.name;
+};
+
+function Male(name) {
+    Person.call(this, name, "Male"); // super call
+}
+// Aufbau der Vererbungshierarchie
+Male.prototype = new Person();</code></pre>
+                    </section>
+                    <section>
+                        <h3>Vererbung #2</h3>
+    <pre><code class="javascript" contenteditable>Male.prototype.getName = function() {
+    // super call
+    return "Mr " + Person.prototype.getName.call(this);
+};
+
+var olli = new Male('Olli');
+olli.getName() === 'Mr Olli';
+olli.gender === 'Male';
+olli instanceof Male;
+olli instanceof Person;
+olli instanceof Object;</code></pre>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Module</h2>
+                        <p class="fragment">Module in JavaScript werden über <code>Closures</code> realisiert</p>
+                    </section>
+                    <section>
+                        <h2>Closure in einem Satz</h2>
+                        <p>Eine innere Funktion hat immer Zugriff auf alle Variablen und Parameter ihrer äußeren Funktion, <em>auch wenn diese äußere Funktion bereits beendet ist</em>.</p>
+                        <p><small>Frei nach <em>Douglas Crockford</em></small></p>
+                    </section>
+
+                <section>
+                    <h3>Beispiel Closure</h3>
+                        <pre><code class="javascript" contenteditable>function outer() {
+    var used = "Olli";
+    var unused = "Weg";
+    return (function() {
+        return "Text: " + used;
+    });
+}
+
+var inner = outer();
+console.log(inner());</code></pre>
+                </section>
+                    <section>
+                        <h3>Revealing Module Pattern</h3>
+<pre><code class="javascript" contenteditable>var humanresources = (function () {
+    function InternalStuff() {
+    }
+
+    function Person(name) {
+        this.name = name;
+        // uses internal stuff
+    }
+
+    return {
+        Person: Person
+    };
+})();
+</code></pre>
+                    </section>
+                    <section>
+                    <h3>Sichtbarkeit bei Revealing Module Pattern</h3>
+<pre><code class="javascript" contenteditable>var olli = new humanresources.Person('Olli');
+olli.name === 'Olli';
+// TypeError: undefined is not a function
+new humanresources.InternalStuff();</code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>TypeScript</h2>
+                    <ul>
+                        <li class="fragment">Obermenge von ECMAScript 5
+                        <li class="fragment">Erweiterung kompatibel mit ECMAScript 6, soweit möglich
+                        <li class="fragment">Einführung einer Compiler-Stufe
+                        <li class="fragment">Compiler erzeugt Code wie von Hand geschrieben
+                        <li class="fragment">Mischen von TypeScript und purem JavaScript jederzeit problemlos möglich
+                    </ul>
+                </section>
+                <section>
+                    <h3>Neue Sprach-Konzepte</h3>
+                    <ul>
+                        <li class="fragment">Statische Typen
+                        <li class="fragment">Externe Deklarationen
+                        <li class="fragment">Module
+                        <li class="fragment">Klassen
+                        <li class="fragment">Vererbung
+                    </ul>
+                </section>
+            <section>
+        <h3>Beispiel-Code</h3>
+<pre><code class="java javascript" contenteditable>module customers {
+    export interface HasName {
+        getName(): string;
+    }
+
+    export class Person implements HasName {
+        constructor(private name: string, private alter: number,
+        private geschlecht: string = 'F') {
+        }
+        getName() {
+            return this.name;
+        }
+    }
+}
+var olli: HasName = new customers.Person('Olli', 43);</code></pre>
+    </section>
+
+            </section>
+            <section>
+                <h2>Wrap-Up</h2>
+                <ul>
+                    <li class="fragment">JavaScript wird immer wichtiger
+                    <li class="fragment">JavaScript läuft auf dem Client und dem Server
+                    <li class="fragment">Klassen, Vererbung und Module sind über Patterns möglich
+                    <li class="fragment">TypeScript für unternehmenskritische Anwendungen
+                </ul>
+            </section>
+            <section>
+    <h1>Vielen Dank</h1>
+
+    <h3>Fragen / Diskussion</h3>
+
+    <p>
+        <small><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+        </small>
+    </p>
+</section>
+
+            </div>
+
+		</div>
+
+		<script src="../reveal.js/lib/js/head.min.js"></script>
+		<script src="../reveal.js/js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/../reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/none
+
+				// Optional libraries used to extend on ../reveal.js
+				dependencies: [
+					{ src: '../reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../reveal.js/plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
